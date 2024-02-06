@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 using UnityEngine.Serialization;
 
 
-//  ***** ENUMS *****
+#region ENUMS //    ***** ENUMS ***** 
 
 public enum AudioFx
 {
@@ -31,19 +31,9 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioMixer audioMixer;
 
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
+#endregion ENUMS
 
-        else
-            Destroy(gameObject);
-            
-        DontDestroyOnLoad(gameObject);
-    }
-
-
-    //  ***** PLAYS *****
+    #region PLAYS //    ***** PLAYS ***** 
 
     public void PlayAudioClip(AudioClip audioClip, AudioSource audioSource)
     {
@@ -83,8 +73,9 @@ public class SoundManager : MonoBehaviour
         SetAudioSourceLoop(audioSource, isLooping);
     }
 
+    #endregion PLAYS
 
-    //  ***** AUDIOSOURCES *****
+    #region AUDIOSOURCES //    ***** AUDIOSOURCES ***** 
 
     public void SetAudioSourceLoop(AudioSource audioSource, bool isLoop)
     {
@@ -116,8 +107,9 @@ public class SoundManager : MonoBehaviour
         audioSource.mute = !audioSource.mute;
     }
     
+    #endregion AUDIOSOURCES
     
-    //  ***** VOLUMES *****
+    #region VOLUMES //    ***** VOLUMES ***** 
 
     public void SetMusicVolume(float volume)
     {
@@ -148,48 +140,48 @@ public class SoundManager : MonoBehaviour
 
         PlayerPrefs.Save();
     }
+
+    #endregion VOLUMES
 }
 
 /*
-Para reproducir sonidos en otros scripts con el soundmanager:
+Para reproducir sonidos en otros scripts con el GameManager:
 
- 1. Añadir los sonidos en el inspector del gameobject del soundmanager
+ 1. Añadir los sonidos en el inspector del GameObject del SoundManager
 
- 2. Añadir los sonidos al enum al principio del script del soundmanager
+ 2. Añadir los sonidos al enum al principio del script del SoundManager
 
  3. Referenciar en el script desde el que se quiere reproducir el sonido
 
-    Ejs:
+    Ejemplo:
     
-    //Audio
+    // Audio
     public AudioSource MusicAudioSource; 
 
-       void Start()
+    void Start()
     {
-        //Music AudioSource
-        GameObject m_MusicAudioSource = GameObject.Find("MusicAudioSource");
-        MusicAudioSource = m_MusicAudioSource.GetComponent<AudioSource>();
+        // Music AudioSource
+        MusicAudioSource = GameManager.Instance.GetComponent<SoundManager>().musicAudioSource;
     }
 
     ///
 
-    //Audio
+    // Audio
     public AudioSource FxAudioSource; 
 
-       void Start()
+    void Start()
     {
-        //Fx AudioSource
-        GameObject m_FxAudioSource = GameObject.Find("FxAudioSource");
-        FxAudioSource = m_FxAudioSource.GetComponent<AudioSource>();
+        // Fx AudioSource
+        FxAudioSource = GameManager.Instance.GetComponent<SoundManager>().fxAudioSource;
     }
 
  4. Reproducir sonido (musicofx.nombresonido, audiosource, loop)
 
-    Ejs:
+    Ejemplo:
 
-    SoundManager.Instance.PlayMusic(AudioMusic.MenuMusic, MusicAudioSource, true);
+    GameManager.Instance.GetComponent<SoundManager>().PlayMusic(AudioMusic.MenuMusic, MusicAudioSource, true);
 
     ///
 
-    SoundManager.Instance.PlayFx(AudioFx.click, FxAudioSource, false);
+    GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.click, FxAudioSource, false);
 */
