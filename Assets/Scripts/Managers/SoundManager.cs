@@ -9,8 +9,7 @@ using UnityEngine.Serialization;
 
 public enum AudioFx
 {
-    ejemplofx,
-    ejemplofx2,
+    start,
 }
 
 public enum AudioMusic
