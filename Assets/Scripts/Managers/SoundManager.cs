@@ -4,26 +4,19 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Serialization;
 
-public enum AudioFX
+
+//  ***** ENUMS *****
+
+public enum AudioFx
 {
-    BallHit,
-    ScoredGoal,
-    VictoryCheers,
-    DefeatBoss
+    ejemplofx,
+    ejemplofx2,
 }
 
 public enum AudioMusic
 {
     MenuMusic,
-    LevelMusic
-}
-
-public enum AudioAmbience
-{
-    start,
-    click,
-    death,
-    attack,
+    LevelMusic,
 }
 
 public class SoundManager : MonoBehaviour
@@ -32,10 +25,9 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private List<AudioClip> m_fxClips;
     [SerializeField] private List<AudioClip> m_musicClips;
-    [SerializeField] private List<AudioClip> m_fxAmbienceClips;
 
+    [SerializeField] private AudioSource fxAudioSource;
     [SerializeField] private AudioSource musicAudioSource;
-    [SerializeField] private AudioSource ambienceAudioSource;
 
     [SerializeField] private AudioMixer audioMixer;
 
@@ -43,10 +35,15 @@ public class SoundManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+
         else
             Destroy(gameObject);
+            
         DontDestroyOnLoad(gameObject);
     }
+
+
+    //  ***** PLAYS *****
 
     public void PlayAudioClip(AudioClip audioClip, AudioSource audioSource)
     {
@@ -58,9 +55,18 @@ public class SoundManager : MonoBehaviour
         audioSource.Play();
     }
 
-    public void PlayFx(AudioFX audioFX, AudioSource audioSource)
+    public void PlayFx(AudioFx audioFx, bool isLooping = true)
     {
-        audioSource.PlayOneShot(m_fxClips[(int)audioFX]);
+        fxAudioSource.clip = m_fxClips[(int)audioFx];
+        fxAudioSource.Play();
+        SetAudioSourceLoop(fxAudioSource, isLooping);
+    }
+    
+    public void PlayFx(AudioFx audioFx, AudioSource audioSource, bool isLooping = true)
+    {
+        audioSource.clip = m_fxClips[(int)audioFx];
+        audioSource.Play();
+        SetAudioSourceLoop(audioSource, isLooping);
     }
 
     public void PlayMusic(AudioMusic audioMusic, bool isLooping = true)
@@ -77,19 +83,8 @@ public class SoundManager : MonoBehaviour
         SetAudioSourceLoop(audioSource, isLooping);
     }
 
-    public void PlayAmbience(AudioAmbience audioAmbience, bool isLooping = true)
-    {
-        ambienceAudioSource.clip = m_fxAmbienceClips[(int)audioAmbience];
-        ambienceAudioSource.Play();
-        SetAudioSourceLoop(ambienceAudioSource, isLooping);
-    }
 
-    public void PlayAmbience(AudioAmbience audioAmbience, AudioSource audioSource, bool isLooping = true)
-    {
-        audioSource.clip = m_fxAmbienceClips[(int)audioAmbience];
-        audioSource.Play();
-        SetAudioSourceLoop(audioSource, isLooping);
-    }
+    //  ***** AUDIOSOURCES *****
 
     public void SetAudioSourceLoop(AudioSource audioSource, bool isLoop)
     {
@@ -120,20 +115,18 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.mute = !audioSource.mute;
     }
+    
+    
+    //  ***** VOLUMES *****
 
     public void SetMusicVolume(float volume)
     {
         audioMixer.SetFloat("MusicVolume", volume);
     }
 
-    public void SetAmbienceVolume(float volume)
+    public void SetFxVolume(float volume)
     {
-        audioMixer.SetFloat("AmbienceVolume", volume);
-    }
-
-    public void SetFXVolume(float volume)
-    {
-        audioMixer.SetFloat("FXVolume", volume);
+        audioMixer.SetFloat("FxVolume", volume);
     }
 
     public void SaveVolumes()
@@ -141,19 +134,62 @@ public class SoundManager : MonoBehaviour
         float tempValue;
         if (audioMixer.GetFloat("MusicVolume", out tempValue))
             PlayerPrefs.SetFloat("MusicVolume", tempValue);
-        if (audioMixer.GetFloat("AmbienceVolume", out tempValue))
-            PlayerPrefs.SetFloat("AmbienceVolume", tempValue);
-        if (audioMixer.GetFloat("FXVolume", out tempValue))
-            PlayerPrefs.SetFloat("FXVolume", tempValue);
+
+        if (audioMixer.GetFloat("FxVolume", out tempValue))
+            PlayerPrefs.SetFloat("FxVolume", tempValue);
+            
         PlayerPrefs.Save();
     }
 
     public void SetVolumes()
     {
         audioMixer.SetFloat("MusicVolume", PlayerPrefs.GetFloat("MusicVolume"));
-        audioMixer.SetFloat("AmbienceVolume", PlayerPrefs.GetFloat("AmbienceVolume"));
         audioMixer.SetFloat("FXVolume", PlayerPrefs.GetFloat("FXVolume"));
 
         PlayerPrefs.Save();
     }
 }
+
+/*
+Para reproducir sonidos en otros scripts con el soundmanager:
+
+ 1. Añadir los sonidos en el inspector del gameobject del soundmanager
+
+ 2. Añadir los sonidos al enum al principio del script del soundmanager
+
+ 3. Referenciar en el script desde el que se quiere reproducir el sonido
+
+    Ejs:
+    
+    //Audio
+    public AudioSource MusicAudioSource; 
+
+       void Start()
+    {
+        //Music AudioSource
+        GameObject m_MusicAudioSource = GameObject.Find("MusicAudioSource");
+        MusicAudioSource = m_MusicAudioSource.GetComponent<AudioSource>();
+    }
+
+    ///
+
+    //Audio
+    public AudioSource FxAudioSource; 
+
+       void Start()
+    {
+        //Fx AudioSource
+        GameObject m_FxAudioSource = GameObject.Find("FxAudioSource");
+        FxAudioSource = m_FxAudioSource.GetComponent<AudioSource>();
+    }
+
+ 4. Reproducir sonido (musicofx.nombresonido, audiosource, loop)
+
+    Ejs:
+
+    SoundManager.Instance.PlayMusic(AudioMusic.MenuMusic, MusicAudioSource, true);
+
+    ///
+
+    SoundManager.Instance.PlayFx(AudioFx.click, FxAudioSource, false);
+*/
