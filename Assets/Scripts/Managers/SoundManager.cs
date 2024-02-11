@@ -10,6 +10,7 @@ using UnityEngine.Serialization;
 public enum AudioFx
 {
     start,
+    click,
 }
 
 public enum AudioMusic

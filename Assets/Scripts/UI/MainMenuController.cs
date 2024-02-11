@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject mainCanvas, optionsCanvas;
-    [SerializeField] private Slider ambienceSlider;
+    [SerializeField] private Slider fxSlider;
     [SerializeField] private Slider musicSlider;
 
     public AudioSource MusicAudioSource;
@@ -20,14 +20,14 @@ public class MainMenuController : MonoBehaviour
 
     private void Awake()
     {
-        //GameManager.Instance.GetComponent<SoundManager>().SetVolumes();
+        GameManager.Instance.GetComponent<SoundManager>().SetVolumes();
     }
 
     private void Start()
     {
         OnBackClicked();
         animator.SetBool("Fade", true);
-        GameManager.Instance.GetComponent<SoundManager>().PlayMusic(AudioMusic.MenuMusic, MusicAudioSource, true);      //olaaaaaaaaaaaaaaaaaaaaaaaa
+        GameManager.Instance.GetComponent<SoundManager>().PlayMusic(AudioMusic.MenuMusic, MusicAudioSource, true);
     }
 
     #region MainMenuMethods
@@ -49,12 +49,12 @@ public class MainMenuController : MonoBehaviour
     {
         mainCanvas.SetActive(false);
         optionsCanvas.SetActive(true);
-        //SoundManager.Instance.PlayAmbience(AudioAmbience.click, AmbienceAudioSource, false);
+        GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.click, FxAudioSource, false);
     }
 
     public void OnExitClicked()
     {
-        //SoundManager.Instance.PlayAmbience(AudioAmbience.click, AmbienceAudioSource, false);
+        GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.click, FxAudioSource, false);
         Debug.Log("Game was exited");
         SoundManager.Instance.SaveVolumes();
         Application.Quit();
@@ -64,10 +64,10 @@ public class MainMenuController : MonoBehaviour
 
     #region OptionsMenuMethods
 
-    public void OnAmbienceVolumeChanged()
+    public void OnFxVolumeChanged()
     {
-        //SoundManager.Instance.SetAmbienceVolume(SliderToFaderFloatConvertion(ambienceSlider.value));
-        //SoundManager.Instance.PlayAmbience(AudioAmbience.click, AmbienceAudioSource, false);
+        GameManager.Instance.GetComponent<SoundManager>().SetFxVolume(SliderToFaderFloatConvertion(fxSlider.value));
+        GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.click, FxAudioSource, false);
     }
 
     public void OnMusicVolumeChanged()
@@ -82,8 +82,8 @@ public class MainMenuController : MonoBehaviour
     
     public void OnBackClicked()
     {
-        //SoundManager.Instance.SaveVolumes();
-        //SoundManager.Instance.PlayAmbience(AudioAmbience.click, AmbienceAudioSource, false);
+        GameManager.Instance.GetComponent<SoundManager>().SaveVolumes();
+        GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.click, FxAudioSource, false);
         optionsCanvas.SetActive(false);
         mainCanvas.SetActive(true);
     }
