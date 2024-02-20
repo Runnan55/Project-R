@@ -29,6 +29,7 @@ void Start()
     Cursor.visible = false; 
 
       currentBullets = maxBullets;
+        animator = GetComponent<Animator>();
    
 } 
 
