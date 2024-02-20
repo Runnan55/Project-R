@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CharacterMovement : MonoBehaviour
 {
 public float speed = 10.0f; 
 public float VelcocityUPDown = 1.0f; 
-public float sensitivity = 0.5f; 
+public float sensitivity = 0.5f;
+public Animator animator;
 
 private Vector3 moveDirection = Vector3.zero;
 
@@ -43,9 +45,10 @@ public void MovimientoJugador()
 
     // Mover en la dirección de las teclas presionadas
     Vector3 moveDirection = moveHorizontal * playerCamera.transform.right + moveVertical * playerCamera.transform.forward;
+        
 
-    // Si se presiona la tecla de espacio, mover hacia arriba
-    if (Input.GetKey(KeyCode.Space))
+        // Si se presiona la tecla de espacio, mover hacia arriba
+        if (Input.GetKey(KeyCode.Space))
     {
         moveDirection.y = VelcocityUPDown;
     }
@@ -60,11 +63,15 @@ public void MovimientoJugador()
     {
         moveDirection.Normalize();
     }
+       
 
-    moveDirection *= speed;
+        moveDirection *= speed;
 
     transform.position += moveDirection * Time.deltaTime; // Aplicar movimiento
-}
+
+        animator.SetBool("IsMoving", true);
+
+    }
 
 void DisaproJugador()
 {

@@ -123,6 +123,7 @@ MonoBehaviour:
   speed: 10
   VelcocityUPDown: 1
   sensitivity: 0.5
+  animator: {fileID: 0}
   playerCamera: {fileID: 6583414026209843271}
   projectile: {fileID: 6136241907385498352, guid: b87e9ba770caa5043996e049fa0f41b5,
     type: 3}
