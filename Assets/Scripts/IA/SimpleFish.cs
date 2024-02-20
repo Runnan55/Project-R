@@ -53,7 +53,7 @@ public class SimpleFish : MonoBehaviour
                     break;
                 case 2:
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, angulo, 0.5f);
-                    transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+                    transform.Translate(Vector3.forward * 1 * Time.deltaTime);
                     //animator.SetBool("walk", true);
                     break;
 
@@ -67,7 +67,7 @@ public class SimpleFish : MonoBehaviour
                 lookPos.y = 0;
                 var rotation = Quaternion.LookRotation(lookPos);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 3);
-                transform.Translate(Vector3.forward * 4 * Time.deltaTime);
+                transform.Translate(Vector3.forward * 2 * Time.deltaTime);
 
             }
             else
