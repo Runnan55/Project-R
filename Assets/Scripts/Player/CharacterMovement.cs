@@ -20,10 +20,11 @@ public GameObject projectile; // El objeto de juego que se disparará
  private int currentBullets; // Balas actuales
 public float reloadTime = 2.5f; // Tiempo de recarga en segundos
 private bool canShoot = true; // Si el jugador puede disparar
+public GameObject shootOrigin; // Este es el GameObject desde donde se disparará el proyectil
 
+    private float mouseSensitivity = 0.5f;
 
-
-void Start() 
+    void Start() 
 {
     Cursor.lockState = CursorLockMode.Locked; 
     Cursor.visible = false; 
@@ -43,6 +44,10 @@ public void MovimientoJugador()
 {
     float moveHorizontal = Input.GetAxis("Horizontal"); 
     float moveVertical = Input.GetAxis("Vertical"); 
+    float mouseHorizontal = Input.GetAxis("Mouse X");
+
+    // Rotar el jugador en el eje Y basado en el movimiento horizontal del mouse
+    transform.Rotate(0, mouseHorizontal * mouseSensitivity, 0);
 
     // Mover en la dirección de las teclas presionadas
     Vector3 moveDirection = moveHorizontal * playerCamera.transform.right + moveVertical * playerCamera.transform.forward;
@@ -68,34 +73,31 @@ public void MovimientoJugador()
 
         moveDirection *= speed;
 
-    transform.position += moveDirection * Time.deltaTime; // Aplicar movimiento
+        transform.position += moveDirection * Time.deltaTime; // Aplicar movimiento
 
-        animator.SetBool("IsMoving", true);
+        
 
     }
 
 void DisaproJugador()
 {
+    if (!canShoot || currentBullets <= 0)
+        return;
 
-        if (!canShoot || currentBullets <= 0)
-         return;
-
-     
-    
     if (Input.GetMouseButtonDown(0))
     {
-        // Crea una copia del proyectil
-        GameObject newProjectile = Instantiate(projectile, transform.position, Quaternion.identity);
+        // Calcula la posición delante del GameObject shootOrigin
+        Vector3 spawnPosition = shootOrigin.transform.position;
 
-        // Añade una velocidad al proyectil para que se mueva en la dirección en la que la cámara está mirando
-        newProjectile.GetComponent<Rigidbody>().velocity = playerCamera.transform.forward * projectileSpeed;
-        
+
+        // Crea una copia del proyectil en la posición calculada y con la misma rotación que el objeto
+        GameObject newProjectile = Instantiate(projectile, spawnPosition, shootOrigin.transform.rotation);
+
+        // Añade una velocidad al proyectil para que se mueva en la dirección en la que el objeto está mirando
+        newProjectile.GetComponent<Rigidbody>().velocity = shootOrigin.transform.forward * projectileSpeed;
 
         StartCoroutine(Reload());
-    }           
-            
-        
-
+    }
 }
 
  IEnumerator Reload()

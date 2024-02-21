@@ -23,7 +23,7 @@ public class CameraMovement : MonoBehaviour
     {
         Vector3 rotation = transform.localRotation.eulerAngles;
         verticalRotation = rotation.x;
-        horizontalRotation = rotation.y;
+       
         initialRotation = transform.rotation;
 
             // Guarda la posición Y original de la cámara
@@ -31,18 +31,18 @@ public class CameraMovement : MonoBehaviour
     time = 0;
     
     }
-
 void Update()
 {
     float mouseX = Input.GetAxis("Mouse X");
     float mouseY = -Input.GetAxis("Mouse Y");
 
-    horizontalRotation += mouseX * sensitivity * Time.deltaTime;
     verticalRotation += mouseY * sensitivity * Time.deltaTime;
-
     verticalRotation = Mathf.Clamp(verticalRotation, -clampAngle, clampAngle);
 
-    Quaternion localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0.0f);
+    // Utilizar la rotación en el eje Y del jugador para la rotación horizontal de la cámara
+    float playerYRotation = player.eulerAngles.y;
+
+    Quaternion localRotation = Quaternion.Euler(verticalRotation, playerYRotation, 0.0f);
 
     if (Input.GetKey(KeyCode.A))
     {
@@ -59,13 +59,17 @@ void Update()
 
     currentZRotation = Mathf.SmoothDampAngle(currentZRotation, targetZRotation, ref rotationVelocity, 0.5f);
 
-
-
     transform.rotation = localRotation * Quaternion.Euler(0, 0, currentZRotation);
 
+    
+   
+}
+
+void LateUpdate()
+{
     // Oscilación vertical de la cámara
-    time += Time.deltaTime;
-    float newYPosition = Mathf.Lerp(-0.5f, 0.5f, Mathf.PingPong(time, 1));
+    time += Time.deltaTime * 0.7f; // Reduce la velocidad a la mitad
+    float newYPosition = Mathf.Lerp(0.3f, -0.3f, Mathf.PingPong(time, 1));
 
     // Hacer que la cámara siga al jugador y aplique la oscilación
     transform.position = player.position + offset + new Vector3(0, newYPosition, 0);
