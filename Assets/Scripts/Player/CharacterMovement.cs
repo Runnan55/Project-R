@@ -22,6 +22,9 @@ public float reloadTime = 2.5f; // Tiempo de recarga en segundos
 private bool canShoot = true; // Si el jugador puede disparar
 public GameObject shootOrigin; // Este es el GameObject desde donde se disparará el proyectil
 
+    public AudioSource fxAudioSource; 
+
+
     private float mouseSensitivity = 0.5f;
 
     void Start() 
@@ -31,7 +34,8 @@ public GameObject shootOrigin; // Este es el GameObject desde donde se disparar�
 
       currentBullets = maxBullets;
         animator = GetComponent<Animator>();
-   
+                   fxAudioSource = GameManager.Instance.GetComponent<SoundManager>().fxAudioSource;
+
 } 
 
 void Update()
@@ -86,6 +90,9 @@ void DisaproJugador()
 
     if (Input.GetMouseButtonDown(0))
     {
+                            GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.shoot, fxAudioSource, false);
+
+
         // Calcula la posición delante del GameObject shootOrigin
         Vector3 spawnPosition = shootOrigin.transform.position;
 

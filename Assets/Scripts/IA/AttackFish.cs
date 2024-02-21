@@ -18,6 +18,8 @@ public class AttackFish : MonoBehaviour
     public int damageAmount = 10;
     public GameObject target;
     private bool puedeMorder = true;
+        public AudioSource fxAudioSource; 
+
 
 
     // Start is called before the first frame update
@@ -25,6 +27,8 @@ public class AttackFish : MonoBehaviour
     {
         //  animator = GetComponent<Animator>();
         target = GameObject.Find("Player");
+        fxAudioSource = GameManager.Instance.GetComponent<SoundManager>().fxAudioSource;
+
     }
 
     // Update is called once per frame
@@ -103,7 +107,9 @@ public class AttackFish : MonoBehaviour
     {
         if (other.CompareTag("Player") && puedeMorder)
         {
-            Debug.Log("¡Mordisco!");
+            Debug.Log("ï¿½Mordisco!");
+            GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.attack, fxAudioSource, false);
+
 
             puedeMorder = false;
 

@@ -14,36 +14,47 @@ public class MainMenuController : MonoBehaviour
 
     public AudioSource MusicAudioSource;
     public AudioSource FxAudioSource;
-    [SerializeField] private float startDelay = 2.0f;
+    [SerializeField] private float startDelay = 0f;
 
     public Animator animator;
 
     private void Awake()
     {
-        GameManager.Instance.GetComponent<SoundManager>().SetVolumes();
+        //GameManager.Instance.GetComponent<SoundManager>().SetVolumes();
     }
 
-    private void Start()
+private void Start()
+{
+    OnBackClicked();
+    animator.SetBool("Fade", true);
+    
+    if(GameManager.Instance != null)
     {
-        OnBackClicked();
-        animator.SetBool("Fade", true);
+        GameManager.Instance.GetComponent<SoundManager>().SetVolumes();
         GameManager.Instance.GetComponent<SoundManager>().PlayMusic(AudioMusic.menuMusic, MusicAudioSource, true);
     }
+    
+    else
+    {
+        Debug.LogError("GameManager.Instance null");
+    }
+}
 
     #region MainMenuMethods
 
     public void OnPlayClicked()
     {
-        animator.SetBool("Fade", false);
-        SoundManager.Instance.PlayFx(AudioFx.start, FxAudioSource, false);
+        //animator.SetBool("Fade", false);
+        GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.click, FxAudioSource, false);
         Invoke("LoadScene", startDelay);
     }
 
-    private void LoadScene()
+    public void LoadScene()
     {
-        SoundManager.Instance.PlayMusic(AudioMusic.levelMusic, MusicAudioSource, true);
-        SoundManager.Instance.PlayMusic(AudioMusic.ambience, MusicAudioSource, true);
+        GameManager.Instance.GetComponent<SoundManager>().PlayMusic(AudioMusic.levelMusic, MusicAudioSource, true);
+        GameManager.Instance.GetComponent<SoundManager>().PlayMusic(AudioMusic.ambience, MusicAudioSource, true);
         SceneManager.LoadScene(AppScenes.Level);
+        SceneManager.LoadScene("Level");
     }
 
     public void OnOptionsClicked()
@@ -73,7 +84,7 @@ public class MainMenuController : MonoBehaviour
 
     public void OnMusicVolumeChanged()
     {
-        SoundManager.Instance.SetMusicVolume(SliderToFaderFloatConvertion(musicSlider.value));
+        GameManager.Instance.GetComponent<SoundManager>().SetMusicVolume(SliderToFaderFloatConvertion(musicSlider.value));
     }
 
     private float SliderToFaderFloatConvertion(float initialValue)

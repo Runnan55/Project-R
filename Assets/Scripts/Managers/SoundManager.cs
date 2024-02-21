@@ -10,8 +10,10 @@ using UnityEngine.Serialization;
 public enum AudioFx
 {
     breath,
-    start,
     click,
+    death,
+    attack,
+    shoot,
 }
 
 public enum AudioMusic
@@ -25,13 +27,13 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    [SerializeField] private List<AudioClip> m_fxClips;
-    [SerializeField] private List<AudioClip> m_musicClips;
+    [SerializeField] public List<AudioClip> m_fxClips;
+    [SerializeField] public List<AudioClip> m_musicClips;
 
-    [SerializeField] private AudioSource fxAudioSource;
-    [SerializeField] private AudioSource musicAudioSource;
+    [SerializeField] public AudioSource fxAudioSource;
+    [SerializeField] public AudioSource musicAudioSource;
 
-    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] public AudioMixer audioMixer;
 
 #endregion ENUMS
 
