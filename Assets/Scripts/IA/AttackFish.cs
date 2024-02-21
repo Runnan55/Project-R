@@ -12,10 +12,12 @@ public class AttackFish : MonoBehaviour
     public float grado;
     public float speed = 1;
     public float maxSpeed = 2;
+    public float distancia = 5;
 
     public bool atacando = false;
     public int damageAmount = 10;
     public GameObject target;
+    private bool puedeMorder = true;
 
 
     // Start is called before the first frame update
@@ -33,7 +35,7 @@ public class AttackFish : MonoBehaviour
 
     public void comportamiento()
     {
-        if (Vector3.Distance(transform.position, target.transform.position) > 5)
+        if (Vector3.Distance(transform.position, target.transform.position) > distancia)
         {
             //animator.SetBool("run", false);
 
@@ -43,6 +45,7 @@ public class AttackFish : MonoBehaviour
             {
                 rutina = Random.Range(0, 2);
                 contador = 0;
+                atacando = false;
             }
 
             switch (rutina)
@@ -68,7 +71,7 @@ public class AttackFish : MonoBehaviour
             if (Vector3.Distance(transform.position, target.transform.position) > 1 && !atacando)
             {
                 var lookPos = target.transform.position - transform.position;
-                lookPos.y = 0;
+                //lookPos.y = 0;
                 var rotation = Quaternion.LookRotation(lookPos);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 3);
                 //animator.SetBool("walk", false);
@@ -96,18 +99,20 @@ public class AttackFish : MonoBehaviour
         atacando = false;
 
     }
-    void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player") && puedeMorder)
         {
-            //PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-            // if (playerHealth != null)
-            {
-                //      playerHealth.TakeDamage(damageAmount);
-            }
-            Debug.Log("ataque");
+            Debug.Log("¡Mordisco!");
+
+            puedeMorder = false;
+
+            Invoke("ResetearCapacidadDeMorder", 0.5f);
         }
+    }
 
-
+    private void ResetearCapacidadDeMorder()
+    {
+        puedeMorder = true;
     }
 }

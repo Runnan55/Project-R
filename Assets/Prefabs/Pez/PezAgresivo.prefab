@@ -280,8 +280,9 @@ MonoBehaviour:
   contador: 0
   angulo: {x: 0, y: 0, z: 0, w: 0}
   grado: 0
-  speed: 1
-  maxSpeed: 2
+  speed: 4
+  maxSpeed: 8
+  distancia: 20
   atacando: 0
   damageAmount: 10
   target: {fileID: 0}

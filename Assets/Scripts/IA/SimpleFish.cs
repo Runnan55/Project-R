@@ -15,6 +15,7 @@ public class SimpleFish : MonoBehaviour
     public bool huyendo = false;
     public float speed = 1;
     public float maxSpeed = 2;
+    public float distancia = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -31,16 +32,17 @@ public class SimpleFish : MonoBehaviour
 
     public void comportamiento()
     {
-        if (Vector3.Distance(transform.position, target.transform.position) > 5)
+        if (Vector3.Distance(transform.position, target.transform.position) > distancia)
         {
             //animator.SetBool("run", false);
-
+            
 
             contador += 1 * Time.deltaTime;
             if (contador >= 2)
             {
                 rutina = Random.Range(0, 2);
                 contador = 0;
+                huyendo = false;
             }
 
             switch (rutina)
@@ -65,11 +67,14 @@ public class SimpleFish : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, target.transform.position) > 1 && !huyendo)
             {
-                var lookPos = transform.position - target.transform.position; 
-                lookPos.y = 0;
+                var lookPos = transform.position - target.transform.position;
                 var rotation = Quaternion.LookRotation(lookPos);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 3);
                 transform.Translate(Vector3.forward * maxSpeed * Time.deltaTime);
+                if (transform.position.y < 1)
+                {
+                    transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+                }
             }
             else
             {
