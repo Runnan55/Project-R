@@ -71,9 +71,9 @@ public class SimpleFish : MonoBehaviour
                 var rotation = Quaternion.LookRotation(lookPos);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 3);
                 transform.Translate(Vector3.forward * maxSpeed * Time.deltaTime);
-                if (transform.position.y < 1)
+                if (transform.position.y < 5)
                 {
-                    transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+                    transform.position = new Vector3(transform.position.x, 5, transform.position.z);
                 }
             }
             else
