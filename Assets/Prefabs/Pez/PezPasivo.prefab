@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5179343480705126897}
   - component: {fileID: 1152161056616808991}
   - component: {fileID: 2721929575920698455}
+  - component: {fileID: 4156252635381581679}
   - component: {fileID: 4727041243781635873}
   m_Layer: 0
   m_Name: PezPasivo
@@ -84,6 +85,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4156252635381581679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3350131572720389477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa9ccd5572502747a3905df59395285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!114 &4727041243781635873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +116,8 @@ MonoBehaviour:
   grado: 0
   target: {fileID: 0}
   huyendo: 0
+  speed: 1
+  maxSpeed: 2
 --- !u!1 &4597324675883835159
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,9 +10,13 @@ public class AttackFish : MonoBehaviour
     //public Animator animator;
     public Quaternion angulo;
     public float grado;
+    public float speed = 1;
+    public float maxSpeed = 2;
 
+    public bool atacando = false;
+    public int damageAmount = 10;
     public GameObject target;
-    public bool atacando=false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +39,7 @@ public class AttackFish : MonoBehaviour
 
 
             contador += 1 * Time.deltaTime;
-            if (contador >= 4)
+            if (contador >= 2)
             {
                 rutina = Random.Range(0, 2);
                 contador = 0;
@@ -53,7 +57,7 @@ public class AttackFish : MonoBehaviour
                     break;
                 case 2:
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, angulo, 0.5f);
-                    transform.Translate(Vector3.forward * 1 * Time.deltaTime);
+                    transform.Translate(Vector3.forward * speed * Time.deltaTime);
                     //animator.SetBool("walk", true);
                     break;
 
@@ -70,8 +74,7 @@ public class AttackFish : MonoBehaviour
                 //animator.SetBool("walk", false);
 
                 //animator.SetBool("run", true);
-                transform.Translate(Vector3.forward * 2 * Time.deltaTime);
-
+                transform.Translate(Vector3.forward * maxSpeed * Time.deltaTime);
                 //animator.SetBool("attack", false);
                 atacando = false;
 
@@ -93,6 +96,18 @@ public class AttackFish : MonoBehaviour
         atacando = false;
 
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            //PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            // if (playerHealth != null)
+            {
+                //      playerHealth.TakeDamage(damageAmount);
+            }
+            Debug.Log("ataque");
+        }
 
 
+    }
 }

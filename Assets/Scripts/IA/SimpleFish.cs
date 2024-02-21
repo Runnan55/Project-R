@@ -13,6 +13,8 @@ public class SimpleFish : MonoBehaviour
 
     public GameObject target;
     public bool huyendo = false;
+    public float speed = 1;
+    public float maxSpeed = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +37,7 @@ public class SimpleFish : MonoBehaviour
 
 
             contador += 1 * Time.deltaTime;
-            if (contador >= 4)
+            if (contador >= 2)
             {
                 rutina = Random.Range(0, 2);
                 contador = 0;
@@ -53,7 +55,7 @@ public class SimpleFish : MonoBehaviour
                     break;
                 case 2:
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, angulo, 0.5f);
-                    transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+                    transform.Translate(Vector3.forward * speed * Time.deltaTime);
                     //animator.SetBool("walk", true);
                     break;
 
@@ -67,8 +69,7 @@ public class SimpleFish : MonoBehaviour
                 lookPos.y = 0;
                 var rotation = Quaternion.LookRotation(lookPos);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 3);
-                transform.Translate(Vector3.forward * 4 * Time.deltaTime);
-
+                transform.Translate(Vector3.forward * maxSpeed * Time.deltaTime);
             }
             else
             {
@@ -81,12 +82,7 @@ public class SimpleFish : MonoBehaviour
         }
     }
 
-    public void FinalAtaque()
-    {
-        //animator.SetBool("attack", false);
-        huyendo = false;
-
-    }
+   
 
 
 }
