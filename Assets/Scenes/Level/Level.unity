@@ -5866,6 +5866,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PLAYER 1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8235870221272167796, guid: 5192dd9f883c69d43b7b9d7265a0f55c,
+        type: 3}
+      propertyPath: WaveSize
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 9189124106413184316, guid: 5192dd9f883c69d43b7b9d7265a0f55c, type: 3}

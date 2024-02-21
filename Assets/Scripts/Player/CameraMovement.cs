@@ -18,6 +18,7 @@ public class CameraMovement : MonoBehaviour
     public Transform player; // Referencia al jugador
     public Vector3 offset; // La distancia entre la cámara y el jugador
     
+    public float WaveSize = 0.3f;
 
     void Start()
     {
@@ -69,7 +70,7 @@ void LateUpdate()
 {
     // Oscilación vertical de la cámara
     time += Time.deltaTime * 0.7f; // Reduce la velocidad a la mitad
-    float newYPosition = Mathf.Lerp(0.3f, -0.3f, Mathf.PingPong(time, 1));
+    float newYPosition = Mathf.Lerp(WaveSize, -WaveSize, Mathf.PingPong(time, 1));
 
     // Hacer que la cámara siga al jugador y aplique la oscilación
     transform.position = player.position + offset + new Vector3(0, newYPosition, 0);
