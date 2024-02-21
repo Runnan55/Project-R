@@ -27,7 +27,7 @@ public class MainMenuController : MonoBehaviour
     {
         OnBackClicked();
         animator.SetBool("Fade", true);
-        GameManager.Instance.GetComponent<SoundManager>().PlayMusic(AudioMusic.MenuMusic, MusicAudioSource, true);
+        GameManager.Instance.GetComponent<SoundManager>().PlayMusic(AudioMusic.menuMusic, MusicAudioSource, true);
     }
 
     #region MainMenuMethods
@@ -41,8 +41,9 @@ public class MainMenuController : MonoBehaviour
 
     private void LoadScene()
     {
-        SoundManager.Instance.PlayMusic(AudioMusic.LevelMusic, MusicAudioSource, true);
-        SceneManager.LoadScene(AppScenes.LOADING_SCENE);
+        SoundManager.Instance.PlayMusic(AudioMusic.levelMusic, MusicAudioSource, true);
+        SoundManager.Instance.PlayMusic(AudioMusic.ambience, MusicAudioSource, true);
+        SceneManager.LoadScene(AppScenes.Level);
     }
 
     public void OnOptionsClicked()

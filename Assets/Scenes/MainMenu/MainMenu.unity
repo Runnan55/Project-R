@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -537,7 +537,7 @@ PrefabInstance:
     - target: {fileID: 8308292185461275594, guid: 0f13786cffaaa1b429da341ddf436eeb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6.668396
+      value: 6.668457
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -787,6 +787,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: '**GAME MANAGER**'
       objectReference: {fileID: 0}
+    - target: {fileID: 5123760003547471710, guid: 43e2fb530a5633643b99ebb36ab63bcd,
+        type: 3}
+      propertyPath: m_fxClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5123760003547471710, guid: 43e2fb530a5633643b99ebb36ab63bcd,
+        type: 3}
+      propertyPath: m_fxClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 67248da5fd81e944a9f1f795a02dc8ca, type: 3}
+    - target: {fileID: 5123760003547471710, guid: 43e2fb530a5633643b99ebb36ab63bcd,
+        type: 3}
+      propertyPath: m_fxClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 67248da5fd81e944a9f1f795a02dc8ca, type: 3}
+    - target: {fileID: 5123760003547471710, guid: 43e2fb530a5633643b99ebb36ab63bcd,
+        type: 3}
+      propertyPath: m_fxClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 67248da5fd81e944a9f1f795a02dc8ca, type: 3}
+    - target: {fileID: 5123760003547471710, guid: 43e2fb530a5633643b99ebb36ab63bcd,
+        type: 3}
+      propertyPath: m_musicClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5123760003547471710, guid: 43e2fb530a5633643b99ebb36ab63bcd,
+        type: 3}
+      propertyPath: m_musicClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: c4820fc6f210ab848a3ab70caf6cb42b, type: 3}
+    - target: {fileID: 5123760003547471710, guid: 43e2fb530a5633643b99ebb36ab63bcd,
+        type: 3}
+      propertyPath: m_musicClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: befbee6b182eaf048bcb1ea77a5c1985, type: 3}
     - target: {fileID: 6553131009721197413, guid: 43e2fb530a5633643b99ebb36ab63bcd,
         type: 3}
       propertyPath: m_LocalPosition.x

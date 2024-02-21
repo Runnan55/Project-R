@@ -9,14 +9,16 @@ using UnityEngine.Serialization;
 
 public enum AudioFx
 {
+    breath,
     start,
     click,
 }
 
 public enum AudioMusic
 {
-    MenuMusic,
-    LevelMusic,
+    menuMusic,
+    levelMusic,
+    ambience,
 }
 
 public class SoundManager : MonoBehaviour
