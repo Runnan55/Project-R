@@ -22,7 +22,13 @@ public class PlayerLife : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+                // Desbloquea el cursor
+    Cursor.lockState = CursorLockMode.None;
+    
+    // Hace el cursor visible
+    Cursor.visible = true;
             SceneManager.LoadScene("mainMenu");
+
         }
     }
 

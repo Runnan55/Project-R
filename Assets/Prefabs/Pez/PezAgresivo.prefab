@@ -264,6 +264,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
+  fxAudioSource: {fileID: 0}
+  Azul: 0
 --- !u!114 &7557586266177901251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,3 +289,4 @@ MonoBehaviour:
   atacando: 0
   damageAmount: 10
   target: {fileID: 0}
+  fxAudioSource: {fileID: 0}

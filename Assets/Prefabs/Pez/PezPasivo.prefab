@@ -98,6 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
+  fxAudioSource: {fileID: 0}
+  Azul: 1
 --- !u!114 &4727041243781635873
 MonoBehaviour:
   m_ObjectHideFlags: 0

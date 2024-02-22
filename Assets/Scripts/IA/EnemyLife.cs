@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class EnemyLife : MonoBehaviour
 {
     public int maxHealth = 100;
-    private int currentHealth;
+    public int currentHealth = 100;
     public AudioSource fxAudioSource; 
 
+    public bool Azul = false;
 
     void Start()
     {
         currentHealth = maxHealth;
-        fxAudioSource = GameManager.Instance.GetComponent<SoundManager>().fxAudioSource;
+        //fxAudioSource = GameManager.Instance.GetComponent<SoundManager>().fxAudioSource;
     }
 
 
@@ -21,20 +22,12 @@ public class EnemyLife : MonoBehaviour
     {
 
         currentHealth -= damage;
-
-
-        if (currentHealth <= 0)
-        {
-            Debug.Log("mori");
-            Destroy(gameObject);
-
-
-        }
     }
 public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bullet")
         {
+            other.gameObject.SetActive(false);
             TakeDamage(100);
         }
     }
@@ -45,20 +38,19 @@ public void Update()
     if (currentHealth <= 0)
     {
         ActualizarPuntos();
-        GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.death, fxAudioSource, false);
+        //GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.death, fxAudioSource, false);
         gameObject.SetActive(false);
     }
 }
 public void ActualizarPuntos()
 {
-        SimpleFish simpleFish = GetComponent<SimpleFish>();
-        AttackFish attackFish = GetComponent<AttackFish>();
+
     // Comprueba si el componente SimpleFish se encontró
-        if (simpleFish != null)
+        if (Azul)
     {
         // Si SimpleFish está presente, imprime "Holaxd"
         Debug.Log("+1 Azul");
-         Text textComponent = GameObject.Find("Canvas/TextPezAzul").GetComponent<Text>();
+         TMP_Text textComponent = GameObject.Find("Canvas/TextPezAzul").GetComponent<TMP_Text>();
             if(textComponent != null)
             {
                 // Encuentra el objeto que tiene el script CharacterMovement
@@ -71,12 +63,13 @@ public void ActualizarPuntos()
 
                  }
             }
-            if (attackFish != null)
+    }
+            if (!Azul)
             {
         // Si SimpleFish está presente, imprime "Holaxd"
         Debug.Log("+1 Red");
                 // Si SimpleFish está presente, imprime "Holaxd"
-        textComponent = GameObject.Find("Canvas/TextPezRojo").GetComponent<Text>();
+        TMP_Text textComponent = GameObject.Find("Canvas/TextPezRojo").GetComponent<TMP_Text>();
             if(textComponent != null)
             {
                 // Encuentra el objeto que tiene el script CharacterMovement
@@ -92,4 +85,4 @@ public void ActualizarPuntos()
      }
      }
     }
-}
+

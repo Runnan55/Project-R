@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class AttackFish : MonoBehaviour
 {
 
@@ -107,17 +107,24 @@ public class AttackFish : MonoBehaviour
     {
         if (other.CompareTag("Player") && puedeMorder)
         {
-            Debug.Log("�Mordisco!");
-            GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.attack, fxAudioSource, false);
+            Debug.Log("¡Mordisco!");
+            //GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.attack, fxAudioSource, false);
             PlayerLife playerLife = other.gameObject.GetComponent<PlayerLife>();
             if (playerLife != null)
-        {
-            playerLife.TakeDamage(25);
-            Debug.Log("Vida Actual "+playerLife.currentHealth);
-        }
+            {
+                playerLife.TakeDamage(25);
+                Debug.Log("Vida Actual " + playerLife.currentHealth);
+
+                // Aquí corregimos para no redeclarar playerLife, y ajustamos el uso de TMP_Text
+                TMP_Text textComponent = GameObject.Find("Canvas/VidaInt").GetComponent<TMP_Text>();
+                if (textComponent != null)
+                {
+                    // Aquí ya tienes playerLife, no necesitas buscarlo de nuevo
+                    textComponent.text = playerLife.currentHealth.ToString();
+                }
+            }
 
             puedeMorder = false;
-
             Invoke("ResetearCapacidadDeMorder", 0.5f);
         }
     }
@@ -127,3 +134,4 @@ public class AttackFish : MonoBehaviour
         puedeMorder = true;
     }
 }
+
