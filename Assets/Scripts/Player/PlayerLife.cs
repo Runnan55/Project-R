@@ -13,7 +13,7 @@ public class PlayerLife : MonoBehaviour
     {
         
     }
-    void awake()
+    void Awake()
     {
         currentHealth = maxHealth;
     }
@@ -27,7 +27,7 @@ public class PlayerLife : MonoBehaviour
     
     // Hace el cursor visible
     Cursor.visible = true;
-            SceneManager.LoadScene("mainMenu");
+            SceneManager.LoadScene("Level");
 
         }
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1328,6 +1328,11 @@ PrefabInstance:
       propertyPath: fxSlider
       value: 
       objectReference: {fileID: 1389990057}
+    - target: {fileID: 4957596203419321782, guid: 0f13786cffaaa1b429da341ddf436eeb,
+        type: 3}
+      propertyPath: startDelay
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4957596203419321782, guid: 0f13786cffaaa1b429da341ddf436eeb,
         type: 3}
       propertyPath: FxAudioSource

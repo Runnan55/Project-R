@@ -56,11 +56,11 @@ public class SoundManager : MonoBehaviour
         SetAudioSourceLoop(fxAudioSource, isLooping);
     }
     
-    public void PlayFx(AudioFx audioFx, AudioSource audioSource, bool isLooping = true)
+    public void PlayFx(AudioFx audioFx, AudioSource fxAudioSource, bool isLooping = true)
     {
-        audioSource.clip = m_fxClips[(int)audioFx];
-        audioSource.Play();
-        SetAudioSourceLoop(audioSource, isLooping);
+        fxAudioSource.clip = m_fxClips[(int)audioFx];
+        fxAudioSource.Play();
+        SetAudioSourceLoop(fxAudioSource, isLooping);
     }
 
     public void PlayMusic(AudioMusic audioMusic, bool isLooping = true)

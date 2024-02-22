@@ -101,7 +101,7 @@ public class AttackFish : MonoBehaviour
         if (other.CompareTag("Player") && puedeMorder)
         {
             Debug.Log("¡Mordisco!");
-            //GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.attack, fxAudioSource, false);
+            GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.attack, fxAudioSource, false);
             PlayerLife playerLife = other.gameObject.GetComponent<PlayerLife>();
             if (playerLife != null)
             {

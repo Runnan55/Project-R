@@ -65,7 +65,7 @@ public void MovimientoJugador()
         moveDirection.y = VelcocityUPDown;
     }
 
-     if (Input.GetKey(KeyCode.LeftShift))
+     if (Input.GetKey(KeyCode.LeftControl))
     {
         moveDirection.y = -VelcocityUPDown;
     }

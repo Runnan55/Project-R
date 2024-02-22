@@ -14,7 +14,7 @@ public class EnemyLife : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        //fxAudioSource = GameManager.Instance.GetComponent<SoundManager>().fxAudioSource;
+        fxAudioSource = GameManager.Instance.GetComponent<SoundManager>().fxAudioSource;
     }
 
 
@@ -38,7 +38,7 @@ public void Update()
     if (currentHealth <= 0)
     {
         ActualizarPuntos();
-        //GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.death, fxAudioSource, false);
+        GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.death, fxAudioSource, false);
         gameObject.SetActive(false);
     }
 }
