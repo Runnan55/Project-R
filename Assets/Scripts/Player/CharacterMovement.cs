@@ -10,6 +10,8 @@ public float VelcocityUPDown = 1.0f;
 public float sensitivity = 0.5f;
 public Animator animator;
 
+public int PuntosAzul = 0;
+public int PuntosRojo = 0;
 private Vector3 moveDirection = Vector3.zero;
 
 public Camera playerCamera;

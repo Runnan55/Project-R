@@ -109,7 +109,12 @@ public class AttackFish : MonoBehaviour
         {
             Debug.Log("�Mordisco!");
             GameManager.Instance.GetComponent<SoundManager>().PlayFx(AudioFx.attack, fxAudioSource, false);
-
+            PlayerLife playerLife = other.gameObject.GetComponent<PlayerLife>();
+            if (playerLife != null)
+        {
+            playerLife.TakeDamage(25);
+            Debug.Log("Vida Actual "+playerLife.currentHealth);
+        }
 
             puedeMorder = false;
 
