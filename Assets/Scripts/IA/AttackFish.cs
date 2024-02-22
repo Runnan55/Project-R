@@ -86,14 +86,7 @@ public class AttackFish : MonoBehaviour
                 atacando = false;
 
             }
-            else
-            {
-                //animator.SetBool("walk", false);
-                //animator.SetBool("run", false);
-
-                //animator.SetBool("attack", true);
-                atacando = true;
-            }
+          
         }
     }
 

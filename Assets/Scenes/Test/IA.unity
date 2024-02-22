@@ -882,7 +882,7 @@ Transform:
   m_GameObject: {fileID: 1690382749}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.45, y: 5.89, z: 23.84}
+  m_LocalPosition: {x: -29.38, y: 5.89, z: 28.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1359,6 +1359,7 @@ MonoBehaviour:
   atacando: 0
   damageAmount: 10
   target: {fileID: 1690382749}
+  fxAudioSource: {fileID: 0}
 --- !u!114 &4283061611468136196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1372,6 +1373,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 100
+  fxAudioSource: {fileID: 0}
+  Azul: 0
 --- !u!135 &4283061611468136197
 SphereCollider:
   m_ObjectHideFlags: 0
